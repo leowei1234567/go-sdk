@@ -269,7 +269,6 @@ func (c *Client) UnSubscribeEventLogs(filterID string) error {
 	return c.apiHandler.UnSubscribeEventLogs(filterID)
 }
 
-
 func (c *Client) SubscribeTopic(topic string, handler func([]byte, *[]byte)) error {
 	return c.apiHandler.SubscribeTopic(topic, handler)
 }
@@ -377,6 +376,11 @@ func (c *Client) GetConsensusStatus(ctx context.Context) ([]byte, error) {
 // GetSyncStatus returns the synchronization status of the group
 func (c *Client) GetSyncStatus(ctx context.Context) (*types.SyncStatus, error) {
 	return c.apiHandler.GetSyncStatus(ctx, c.groupID)
+}
+
+// GetNodeInfo returns information of the node
+func (c *Client) GetNodeInfo(ctx context.Context) (*types.Node, error) {
+	return c.apiHandler.GetNodeInfo(ctx, c.groupID)
 }
 
 // GetPeers returns the information of the connected peers

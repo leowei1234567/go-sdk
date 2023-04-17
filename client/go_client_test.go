@@ -194,6 +194,20 @@ func TestSyncStatus(t *testing.T) {
 	t.Logf("synchronization Status:\n%s", raw)
 }
 
+func TestNodeInfo(t *testing.T) {
+	c := GetClient(t)
+
+	node, err := c.GetNodeInfo(context.Background())
+	if err != nil {
+		t.Fatalf("node info not found: %v", err)
+	}
+	raw, err := json.MarshalIndent(node, "", indent)
+	if err != nil {
+		t.Fatalf("node info marshalIndent error: %v", err)
+	}
+	t.Logf("node info:\n%s", raw)
+}
+
 func TestPeers(t *testing.T) {
 	c := GetClient(t)
 

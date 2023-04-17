@@ -396,6 +396,16 @@ func (api *APIHandler) GetSyncStatus(ctx context.Context, groupID int) (*types.S
 	return &syncStatus, err
 }
 
+// GetNodeInfo returns information for single node of the group
+func (api *APIHandler) GetNodeInfo(ctx context.Context, groupID int) (*types.Node, error) {
+	var node types.Node
+	err := api.CallContext(ctx, &node, "getNodeInfo", groupID)
+	if err != nil {
+		return nil, err
+	}
+	return &node, nil
+}
+
 // GetPeers returns the information of the connected peers
 func (api *APIHandler) GetPeers(ctx context.Context, groupID int) (*[]types.Node, error) {
 	var nodes []types.Node
