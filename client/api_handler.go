@@ -580,14 +580,17 @@ func (api *APIHandler) GetPendingTransactions(ctx context.Context, groupID int) 
 }
 
 // GetPendingTxSize returns amount of the pending transactions
-func (api *APIHandler) GetPendingTxSize(ctx context.Context, groupID int) ([]byte, error) {
-	var raw interface{}
+func (api *APIHandler) GetPendingTxSize(ctx context.Context, groupID int) (int64, error) {
+	var raw string
 	err := api.CallContext(ctx, &raw, "getPendingTxSize", groupID)
 	if err != nil {
-		return nil, err
+		return -1, err
 	}
-	js, err := json.MarshalIndent(raw, "", indent)
-	return js, err
+	pendingTxSize, err := strconv.ParseInt(raw, 0, 64)
+	if err != nil {
+		return -1, fmt.Errorf("parse pending tx size failed: %v", err)
+	}
+	return pendingTxSize, err
 }
 
 // GetCode returns the contract code according to the contract address

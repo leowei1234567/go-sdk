@@ -303,12 +303,12 @@ func TestPendingTransactions(t *testing.T) {
 func TestPendingTxSize(t *testing.T) {
 	c := GetClient(t)
 
-	raw, err := c.GetPendingTxSize(context.Background())
+	pendingTxSize, err := c.GetPendingTxSize(context.Background())
 	if err != nil {
 		t.Fatalf("pending transactions not found: %v", err)
 	}
 
-	t.Logf("the amount of the pending transactions:\n%s", raw)
+	t.Logf("the amount of the pending transactions:\n%d", pendingTxSize)
 }
 
 func deployHelloWorld(t *testing.T) (*common.Address, *common.Hash) {

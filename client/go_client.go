@@ -451,7 +451,7 @@ func (c *Client) GetPendingTransactions(ctx context.Context) (*[]types.Transacti
 }
 
 // GetPendingTxSize returns amount of the pending transactions
-func (c *Client) GetPendingTxSize(ctx context.Context) ([]byte, error) {
+func (c *Client) GetPendingTxSize(ctx context.Context) (int64, error) {
 	return c.apiHandler.GetPendingTxSize(ctx, c.groupID)
 }
 
